@@ -71,32 +71,6 @@ Then:
 3. Optionally select peer companies for comparison
 4. Click "Start Analysis" to run the complete analysis
 
-### Command Line
-
-Run analysis from command line:
-
-```bash
-python run_analysis.py SYMBOL [--peers PEER1 PEER2 ...] [--years 5] [--api-key YOUR_KEY]
-```
-
-Example:
-```bash
-python run_analysis.py NVDA --peers AMD INTC TSM --years 5
-```
-
-## Project Structure
-
-- `app.py` - Streamlit web application interface
-- `run_analysis.py` - Command-line analysis script
-- `data_ingestion.py` - Financial data fetching from Alpha Vantage
-- `financial_analysis.py` - Financial ratio calculation and analysis
-- `valuation.py` - DCF and multiples valuation models
-- `comprehensive_analysis.py` - Peer comparison and comprehensive analysis
-- `earnings_quality.py` - Earnings sustainability analysis
-- `qualitative_analysis.py` - Catalyst identification using LLM
-- `investment_memo.py` - Investment memo generation
-- `company_search.py` - Company search and peer recommendation
-
 ## Output
 
 The analysis generates:
