@@ -34,12 +34,6 @@ conda create -n fun_agent python=3.12
 conda activate fun_agent
 ```
 
-**Or using venv:**
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
 3. Install dependencies:
 ```bash
 pip install -r requirements.txt
