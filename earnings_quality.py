@@ -20,15 +20,18 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # Import other modules
-from .financial_analysis import safe_float, safe_get_value
+try:
+    from financial_analysis import safe_float, safe_get_value
+except ImportError:
+    from .financial_analysis import safe_float, safe_get_value
 
 # Import LLM module (for one-time items analysis)
 try:
-    from .talk2ai import OpenAIChat, get_config_from_env
+    from talk2ai import OpenAIChat, get_config_from_env
     OPENAI_AVAILABLE = True
 except ImportError:
     try:
-        from talk2ai import OpenAIChat, get_config_from_env
+        from .talk2ai import OpenAIChat, get_config_from_env
         OPENAI_AVAILABLE = True
     except ImportError:
         OPENAI_AVAILABLE = False
@@ -1755,8 +1758,12 @@ if __name__ == "__main__":
     print("Earnings Quality Analysis Module - Earnings Sustainability Analysis Test")
     print("=" * 60)
     
-    from .data_ingestion import fetch_financial_statements
-    from .qualitative_analysis import fetch_stock_news
+    try:
+        from data_ingestion import fetch_financial_statements
+        from qualitative_analysis import fetch_stock_news
+    except ImportError:
+        from .data_ingestion import fetch_financial_statements
+        from .qualitative_analysis import fetch_stock_news
     
     symbol = "NVDA"
     print(f"\nFetching financial statement data for {symbol}...")

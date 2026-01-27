@@ -179,7 +179,10 @@ def calculate_dcf_valuation(
         # Try to get real-time quote (for current price)
         quote_data = None
         try:
-            from .data_ingestion import get_quote
+            try:
+                from data_ingestion import get_quote
+            except ImportError:
+                from .data_ingestion import get_quote
             quote_data = get_quote(financial_data.get("symbol", ""))
         except:
             pass
@@ -578,7 +581,10 @@ def calculate_multiples_valuation(
         # Try to get real-time quote (for current price)
         quote_data = None
         try:
-            from .data_ingestion import get_quote
+            try:
+                from data_ingestion import get_quote
+            except ImportError:
+                from .data_ingestion import get_quote
             quote_data = get_quote(financial_data.get("symbol", ""))
         except:
             pass

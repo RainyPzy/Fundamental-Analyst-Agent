@@ -23,11 +23,11 @@ warnings.filterwarnings('ignore')
 
 # Import LLM module
 try:
-    from .talk2ai import OpenAIChat, get_config_from_env
+    from talk2ai import OpenAIChat, get_config_from_env
     OPENAI_AVAILABLE = True
 except ImportError:
     try:
-        from talk2ai import OpenAIChat, get_config_from_env
+        from .talk2ai import OpenAIChat, get_config_from_env
         OPENAI_AVAILABLE = True
     except ImportError:
         OPENAI_AVAILABLE = False
@@ -1380,12 +1380,20 @@ def comprehensive_fundamental_analysis(
     
     try:
         # Import all required modules
-        from .data_ingestion import fetch_financial_statements
-        from .financial_analysis import analyze_financial_statements
-        from .valuation import comprehensive_valuation
-        from .comprehensive_analysis import comprehensive_company_analysis
-        from .qualitative_analysis import comprehensive_qualitative_analysis, fetch_stock_news
-        from .earnings_quality import comprehensive_earnings_quality_analysis
+        try:
+            from data_ingestion import fetch_financial_statements
+            from financial_analysis import analyze_financial_statements
+            from valuation import comprehensive_valuation
+            from comprehensive_analysis import comprehensive_company_analysis
+            from qualitative_analysis import comprehensive_qualitative_analysis, fetch_stock_news
+            from earnings_quality import comprehensive_earnings_quality_analysis
+        except ImportError:
+            from .data_ingestion import fetch_financial_statements
+            from .financial_analysis import analyze_financial_statements
+            from .valuation import comprehensive_valuation
+            from .comprehensive_analysis import comprehensive_company_analysis
+            from .qualitative_analysis import comprehensive_qualitative_analysis, fetch_stock_news
+            from .earnings_quality import comprehensive_earnings_quality_analysis
         
         # 1. Data Collection
         print("\n[1/7] 📊 Data Collection...")
@@ -1402,7 +1410,10 @@ def comprehensive_fundamental_analysis(
         # Get peer data for valuation
         peer_data = None
         if peer_symbols:
-            from .data_ingestion import fetch_multiple_symbols
+            try:
+                from data_ingestion import fetch_multiple_symbols
+            except ImportError:
+                from .data_ingestion import fetch_multiple_symbols
             peer_data_dict = fetch_multiple_symbols(peer_symbols, years=years)
             # `fetch_multiple_symbols` 返回的是 {symbol: data} 的字典，这里需要转换成列表
             # 只保留成功拉取的数据（value 不为 None）
@@ -1498,7 +1509,7 @@ if __name__ == "__main__":
     # Example code
     print("\nUsage Example:")
     print("""
-from Fundamental-Analyst-Agent.investment_memo import comprehensive_fundamental_analysis
+from .investment_memo import comprehensive_fundamental_analysis
 
 # Complete analysis workflow
 result = comprehensive_fundamental_analysis(

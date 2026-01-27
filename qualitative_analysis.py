@@ -19,15 +19,18 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # Import data ingestion module
-from .data_ingestion import get_news, get_overview
+try:
+    from data_ingestion import get_news, get_overview
+except ImportError:
+    from .data_ingestion import get_news, get_overview
 
 # Import LLM module
 try:
-    from .talk2ai import OpenAIChat, get_config_from_env
+    from talk2ai import OpenAIChat, get_config_from_env
     OPENAI_AVAILABLE = True
 except ImportError:
     try:
-        from talk2ai import OpenAIChat, get_config_from_env
+        from .talk2ai import OpenAIChat, get_config_from_env
         OPENAI_AVAILABLE = True
     except ImportError:
         OPENAI_AVAILABLE = False

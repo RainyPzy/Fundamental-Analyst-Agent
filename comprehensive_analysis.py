@@ -20,11 +20,11 @@ warnings.filterwarnings('ignore')
 
 # Import LLM module
 try:
-    from .talk2ai import OpenAIChat, get_config_from_env
+    from talk2ai import OpenAIChat, get_config_from_env
     OPENAI_AVAILABLE = True
 except ImportError:
     try:
-        from talk2ai import OpenAIChat, get_config_from_env
+        from .talk2ai import OpenAIChat, get_config_from_env
         OPENAI_AVAILABLE = True
     except ImportError:
         OPENAI_AVAILABLE = False
@@ -33,20 +33,35 @@ except ImportError:
         get_config_from_env = None
 
 # Import other modules
-from .financial_analysis import (
-    analyze_financial_statements,
-    calculate_profitability_ratios,
-    calculate_growth_ratios,
-    calculate_leverage_ratios
-)
+try:
+    from financial_analysis import (
+        analyze_financial_statements,
+        calculate_profitability_ratios,
+        calculate_growth_ratios,
+        calculate_leverage_ratios
+    )
+except ImportError:
+    from .financial_analysis import (
+        analyze_financial_statements,
+        calculate_profitability_ratios,
+        calculate_growth_ratios,
+        calculate_leverage_ratios
+    )
 
 # Lazy import to avoid circular dependencies
-# from .data_ingestion import fetch_financial_statements
-from .valuation import (
-    calculate_multiples_valuation,
-    calculate_wacc,
-    estimate_cost_of_equity
-)
+# from data_ingestion import fetch_financial_statements
+try:
+    from valuation import (
+        calculate_multiples_valuation,
+        calculate_wacc,
+        estimate_cost_of_equity
+    )
+except ImportError:
+    from .valuation import (
+        calculate_multiples_valuation,
+        calculate_wacc,
+        estimate_cost_of_equity
+    )
 
 # ==================== Helper Functions ====================
 
@@ -1362,7 +1377,10 @@ def fetch_peer_financial_data(
     include_quarterly: bool = True
 ) -> List[Dict[str, Any]]:
 
-    from .data_ingestion import fetch_financial_statements
+    try:
+        from data_ingestion import fetch_financial_statements
+    except ImportError:
+        from .data_ingestion import fetch_financial_statements
     
     peer_data_list = []
     
@@ -1559,7 +1577,10 @@ if __name__ == "__main__":
     print("Comprehensive Analysis Module - Comprehensive analysis test")
     print("=" * 60)
     
-    from .data_ingestion import fetch_financial_statements
+    try:
+        from data_ingestion import fetch_financial_statements
+    except ImportError:
+        from .data_ingestion import fetch_financial_statements
     
     symbol = "NVDA"
     print(f"\nFetching financial statements data for {symbol}...")

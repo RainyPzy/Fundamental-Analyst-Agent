@@ -7,7 +7,10 @@ Features:
 """
 
 from typing import Dict, Any, List, Optional
-from .data_ingestion import get_overview
+try:
+    from data_ingestion import get_overview
+except ImportError:
+    from .data_ingestion import get_overview
 
 # Common industry peer company lists (categorized by industry)
 INDUSTRY_PEERS = {
