@@ -105,15 +105,33 @@ with st.container():
             key="openai_url_input",
             help="OpenAI API base URL (default: https://api.openai.com/v1)"
         )
-        model_options = ["gpt-4o-mini", "gpt-4o", "gpt-4-turbo", "gpt-3.5-turbo"]
+
+    
+        model_options = ["gpt-5-nano", "gpt-4o-mini"]
         default_index = model_options.index(st.session_state.ai_model) if st.session_state.ai_model in model_options else 0
-        st.session_state.ai_model = st.selectbox(
-            "AI Model",
+
+
+        selected_model = st.selectbox(
+            "AI Model (Preset Options)",
             options=model_options,
             index=default_index,
             key="ai_model_select",
-            help="Select the AI model for analysis"
+            help="Select a preset AI model for analysis"
         )
+
+        # 可选：自定义模型名称，如果填写则优先使用这里的模型
+        custom_model = st.text_input(
+            "Custom Model (Optional)",
+            value="" if st.session_state.ai_model in model_options else st.session_state.ai_model,
+            key="ai_model_custom_input",
+            help="Enter a custom model name, e.g., gpt-4.1, if different from the preset options above"
+        )
+
+        # 逻辑：如果用户填写了自定义模型，则优先使用自定义模型，否则使用下拉框选择的模型
+        if custom_model and custom_model.strip():
+            st.session_state.ai_model = custom_model.strip()
+        else:
+            st.session_state.ai_model = selected_model
         # Display current URL
         st.caption(f"📍 Current Base URL: `{st.session_state.openai_base_url}`")
     

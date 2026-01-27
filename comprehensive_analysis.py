@@ -1123,17 +1123,17 @@ def assess_management_quality(
         # 5. 生成摘要
         assessment["summary"] = generate_management_quality_summary(assessment)
         
-        print(f"  ✅ 管理层质量评估完成: {assessment['overall_grade']} ({score}/100)")
+        print(f"  ✅ Management quality assessment completed: {assessment['overall_grade']} ({score}/100)")
     
     except Exception as e:
-        print(f"⚠️ 评估管理层质量时出错: {e}")
+        print(f"⚠️ Error assessing management quality: {e}")
         import traceback
         traceback.print_exc()
     
     return assessment
 
 def generate_management_quality_summary(assessment: Dict[str, Any]) -> Dict[str, Any]:
-    """生成管理层质量摘要"""
+    """Generate management quality summary"""
     summary = {
         "key_insights": [],
         "strengths": [],

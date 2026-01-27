@@ -1403,7 +1403,10 @@ def comprehensive_fundamental_analysis(
         peer_data = None
         if peer_symbols:
             from .data_ingestion import fetch_multiple_symbols
-            peer_data = fetch_multiple_symbols(peer_symbols, years=years)
+            peer_data_dict = fetch_multiple_symbols(peer_symbols, years=years)
+            # `fetch_multiple_symbols` 返回的是 {symbol: data} 的字典，这里需要转换成列表
+            # 只保留成功拉取的数据（value 不为 None）
+            peer_data = [data for data in peer_data_dict.values() if data]
         valuation_result = comprehensive_valuation(financial_data, peer_data=peer_data)
         result["valuation_result"] = valuation_result
         
