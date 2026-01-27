@@ -1498,7 +1498,7 @@ if __name__ == "__main__":
     # Example code
     print("\nUsage Example:")
     print("""
-from Fundamental_Analyst.investment_memo import comprehensive_fundamental_analysis
+from Fundamental-Analyst-Agent.investment_memo import comprehensive_fundamental_analysis
 
 # Complete analysis workflow
 result = comprehensive_fundamental_analysis(

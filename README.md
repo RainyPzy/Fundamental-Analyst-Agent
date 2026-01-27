@@ -23,7 +23,7 @@ An AI-powered fundamental analysis tool for comprehensive stock investment resea
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd Fundamental_Analyst
+cd Fundamental-Analyst-Agent
 ```
 
 2. Create and activate a virtual environment (recommended):

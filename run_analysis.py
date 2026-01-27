@@ -21,12 +21,12 @@ try:
     from investment_memo import comprehensive_fundamental_analysis
 except ImportError:
     try:
-        from Fundamental_Analyst.investment_memo import comprehensive_fundamental_analysis
+        from Fundamental-Analyst-Agent.investment_memo import comprehensive_fundamental_analysis
     except ImportError as e:
         print(f"❌ Failed to import analysis module: {e}")
         print(f"Current working directory: {os.getcwd()}")
         print(f"Script directory: {current_dir}")
-        print(f"Please ensure running in Fundamental_Analyst directory")
+        print(f"Please ensure running in Fundamental-Analyst-Agent directory")
         sys.exit(1)
 
 def run_complete_analysis(
