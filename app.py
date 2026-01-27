@@ -27,7 +27,7 @@ sys.path.insert(0, str(parent_dir))
 
 # Import analysis modules
 try:
-    # First try direct import (when app.py is in Fundamental_Analyst directory)
+    # First try direct import (when app.py is in Fundamental-Analyst-Agent directory)
     from investment_memo import comprehensive_fundamental_analysis
     from data_ingestion import fetch_financial_statements, get_overview
     from financial_analysis import analyze_financial_statements
@@ -39,19 +39,19 @@ try:
 except ImportError:
     # If direct import fails, try package import
     try:
-        from Fundamental_Analyst.investment_memo import comprehensive_fundamental_analysis
-        from Fundamental_Analyst.data_ingestion import fetch_financial_statements, get_overview
-        from Fundamental_Analyst.financial_analysis import analyze_financial_statements
-        from Fundamental_Analyst.valuation import comprehensive_valuation
-        from Fundamental_Analyst.comprehensive_analysis import comprehensive_company_analysis
-        from Fundamental_Analyst.qualitative_analysis import comprehensive_qualitative_analysis
-        from Fundamental_Analyst.earnings_quality import comprehensive_earnings_quality_analysis
-        from Fundamental_Analyst.company_search import search_company, get_peer_recommendations, get_common_stocks
+        from Fundamental-Analyst-Agent.investment_memo import comprehensive_fundamental_analysis
+        from Fundamental-Analyst-Agent.data_ingestion import fetch_financial_statements, get_overview
+        from Fundamental-Analyst-Agent.financial_analysis import analyze_financial_statements
+        from Fundamental-Analyst-Agent.valuation import comprehensive_valuation
+        from Fundamental-Analyst-Agent.comprehensive_analysis import comprehensive_company_analysis
+        from Fundamental-Analyst-Agent.qualitative_analysis import comprehensive_qualitative_analysis
+        from Fundamental-Analyst-Agent.earnings_quality import comprehensive_earnings_quality_analysis
+        from Fundamental-Analyst-Agent.company_search import search_company, get_peer_recommendations, get_common_stocks
     except ImportError as e:
         st.error(f"Failed to import analysis modules: {e}")
         st.error(f"Current working directory: {os.getcwd()}")
         st.error(f"Script directory: {current_dir}")
-        st.error(f"Please ensure you are running from Fundamental_Analyst directory: cd Fundamental_Analyst && streamlit run app.py")
+        st.error(f"Please ensure you are running from Fundamental-Analyst-Agent directory: cd Fundamental-Analyst-Agent && streamlit run app.py")
         import traceback
         st.code(traceback.format_exc())
         st.stop()
@@ -219,7 +219,7 @@ with apply_col2:
                 pass
             
             try:
-                from Fundamental_Analyst import data_ingestion as fa_data_ingestion
+                from Fundamental-Analyst-Agent import data_ingestion as fa_data_ingestion
                 fa_data_ingestion.API_KEY = st.session_state.alphavantage_api_key
                 fa_data_ingestion.BASE_URL = st.session_state.alphavantage_base_url
             except:
