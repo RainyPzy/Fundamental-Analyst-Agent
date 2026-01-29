@@ -12,5 +12,5 @@ echo "🚀 Starting Fundamental Analysis Web Application..."
 echo "📁 Working Directory: $SCRIPT_DIR"
 echo ""
 
-streamlit run app.py
+streamlit run src/app.py
 

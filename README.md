@@ -61,9 +61,19 @@ Start the Streamlit web application:
 # On Linux/Mac
 ./start_app.sh
 
+# On Windows
+start_app.bat
+
 # Or directly
-streamlit run app.py
+streamlit run src/app.py
 ```
+
+### Demo Runing
+
+```
+python run_demo.py
+```
+
 
 Then:
 1. Configure your API keys in the web interface
@@ -82,7 +92,18 @@ The analysis generates:
 - Catalyst analysis
 - Full investment memo (downloadable)
 
-Results can be downloaded as:
+### Report Storage
+
+All analysis reports are automatically saved to `report/{stock_code}/` directory, including:
+- **Investment Memo** (`investment_memo_YYYYMMDD_HHMMSS.txt`)
+- **Peer Comparison Report** (`peer_comparison_report_YYYYMMDD_HHMMSS.txt`)
+- **Earnings Quality Report** (`earnings_quality_report_YYYYMMDD_HHMMSS.txt`)
+- **Financial Statements** (CSV format: income statement, balance sheet, cash flow - annual and quarterly)
+- **Financial Ratios** (`financial_ratios_YYYYMMDD_HHMMSS.csv`)
+- **Valuation Data** (`valuation_YYYYMMDD_HHMMSS.csv`)
+- **Complete Analysis Results** (`complete_analysis_YYYYMMDD_HHMMSS.json`)
+
+Results can also be downloaded directly from the web interface as:
 - JSON format (complete analysis data)
 - Text format (investment memo)
 - CSV format (financial statements and ratios)
